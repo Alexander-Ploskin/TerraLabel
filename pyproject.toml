@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "segmenter"
+version = "0.1.0"
+description = ""
+authors = ["Alexander-Ploskin <ploskin0107@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+matplotlib = "^3.9.3"
+torch = "^2.5.1"
+numpy = "^2.2.0"
+segment-anything = "^1.0"
+opencv-python = "^4.10.0.84"
+torchvision = "^0.20.1"
+supervision = "^0.25.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
