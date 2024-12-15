@@ -38,9 +38,6 @@ class SamDataset(Dataset):
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         
         mask = self.get_mask(idx)
-        
-        mask = cv2.imread(str(self.masks[idx]), cv2.IMREAD_COLOR)
-        mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
 
         bboxes = get_bboxes_from_mask(mask)
 

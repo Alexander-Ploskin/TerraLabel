@@ -12,7 +12,7 @@ def get_image_shape(image_path: str) -> Tuple[int, int]:
     return height, width
 
 
-def create_mask_for_frame(annotations_file: str, frame_index: int, image_shape: Any, labels: Dict[str, int]):
+def create_mask_for_frame(annotations_file: str, frame_index: int, image_shape: Any):
     with open(annotations_file, 'r') as f:
         annotations = json.load(f)
 
@@ -26,7 +26,7 @@ def create_mask_for_frame(annotations_file: str, frame_index: int, image_shape: 
                     label = shape['label']
                     points = np.array(shape['points'], dtype=np.float32).reshape((-1, 2))
                     polygon_mask = sv.polygon_to_mask(points, (width, height))
-                    polygon_mask[polygon_mask == 1] = labels[label]
+                    polygon_mask[polygon_mask == 1] = 1
                     mask = np.maximum(mask, polygon_mask)
 
     return mask

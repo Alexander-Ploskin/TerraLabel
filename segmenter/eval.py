@@ -12,7 +12,7 @@ def eval(model_name, checkpoint_path, device, data_dir, batch_size, model_type=N
         if model_type is None:
             raise ValueError("model_type must be provided for SAM model")
         model = SAM(model_type, checkpoint_path, device)
-        dataset = SamDataset(data_dir)
+        dataset = SamDataset.from_cvat(data_dir)
     else:
         raise NotImplementedError
 
@@ -30,7 +30,7 @@ def eval(model_name, checkpoint_path, device, data_dir, batch_size, model_type=N
 def main():
     parser = ArgumentParser()
     parser.add_argument(
-        "--model_name", type=str, required=True, choices=["sam", "drn_c42", "yolo"]
+        "--model_name", type=str, required=True, choices=["sam"]
     )
     parser.add_argument(
         "--checkpoint_path", type=str, required=True, help="Path to model checkpoint"

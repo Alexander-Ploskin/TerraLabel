@@ -19,7 +19,7 @@ class SAM:
         for i in range(len(images)):
             if len(bboxes) == 0:
                 output_masks[i] = torch.zeros_like(images[i])
-            self.predictor.set_image(images[i].to(self.device))
+            self.predictor.set_image(images[i])
             boxes = self.predictor.transform.apply_boxes_torch(
                 bboxes[i], images[i].shape[:2]
             ).to(self.device)
@@ -33,5 +33,5 @@ class SAM:
             output_masks[i] = mask
         return output_masks
 
-    def eval():
+    def eval(self):
         pass
