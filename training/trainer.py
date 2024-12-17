@@ -21,13 +21,14 @@ class SegmenterModeltrainer:
         self.eval_dataloader = eval_dataloader
         self.metric = metric
 
-    def train(self, n_epochs=200):
+    def train(self, file_path, n_epochs=200):
         train_loss_iter = []
         train_loss_epoch = []
         eval_iou = []
         eval_acc = []
         eval_loss = []
         self.model.train()
+        best_val_loss = float('inf')
 
         for epoch in tqdm(range(n_epochs)):  # loop over the dataset multiple times
             print("Epoch:", epoch)
@@ -48,8 +49,12 @@ class SegmenterModeltrainer:
                 self.writer.add_scalar("Train/loss_step", train_loss_iter[-1], idx + epoch * len(self.train_dataloader))
                 self.writer.add_scalar("Train/epoch", epoch + 1, idx + epoch * len(self.train_dataloader))
             
-            train_loss_epoch.append(sum(curr_epoch_loss) / len(curr_epoch_loss))   
+            loss_val = sum(curr_epoch_loss) / len(curr_epoch_loss)
+            train_loss_epoch.append(loss_val)   
             self.writer.add_scalar("Train/loss_epoch", train_loss_epoch[-1], epoch + 1)
+            if loss_val < best_val_loss:
+                self.model.save_pretrained(file_path)
+                best_val_loss = loss_val
 
             with torch.no_grad():
                 for batch in self.eval_dataloader:
