@@ -14,6 +14,11 @@ segment-anything = "^1.0"
 opencv-python = "^4.10.0.84"
 torchvision = "^0.20.1"
 supervision = "^0.25.1"
+transformers = "^4.47.0"
+tensorboard = "^2.18.0"
+datasets = "^3.2.0"
+evaluate = "^0.4.3"
+scikit-learn = "^1.6.0"
 
 
 [build-system]

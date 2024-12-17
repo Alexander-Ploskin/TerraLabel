@@ -166,3 +166,5 @@ data/
 poetry.lock
 
 models/
+
+logs/
