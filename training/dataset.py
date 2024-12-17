@@ -31,7 +31,7 @@ class SemanticSegmentationDataset(Dataset):
         )
         
         train_dataset = SemanticSegmentationDataset(image_processor, train_img_pathes, train_mask_pathes, augmentations)
-        eval_dataset = SemanticSegmentationDataset(image_processor, eval_img_pathes, eval_mask_pathes, augmentations)
+        eval_dataset = SemanticSegmentationDataset(image_processor, eval_img_pathes, eval_mask_pathes)
         
         return train_dataset, eval_dataset
 
