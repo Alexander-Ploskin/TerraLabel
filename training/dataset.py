@@ -3,6 +3,7 @@ from PIL import Image
 import numpy as np
 import os
 from sklearn.model_selection import train_test_split
+import torch
 
 
 class SemanticSegmentationDataset(Dataset):
@@ -53,7 +54,10 @@ class SemanticSegmentationDataset(Dataset):
         encoded_inputs = self.image_processor(image, mask, return_tensors="pt")
 
         for k,v in encoded_inputs.items():
+            if isinstance(encoded_inputs[k], list):
+                encoded_inputs[k] = encoded_inputs[k][0]
             encoded_inputs[k].squeeze_() # remove batch dimension
+        
 
         return encoded_inputs
      

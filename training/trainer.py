@@ -34,6 +34,7 @@ class SegmenterModeltrainer:
             print("Epoch:", epoch)
             curr_epoch_loss = []
             curr_epoch_eval_loss = []
+            
             for idx, batch in enumerate(self.train_dataloader):
                 pixel_values = batch["pixel_values"].to(self.device)
                 labels = batch["labels"].to(self.device)
